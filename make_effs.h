@@ -112,13 +112,13 @@ public :
    TBranch        *b_recoFSParticles_dEdx;   //!
    TBranch        *b_recoFSParticles_momentum;   //!
 
-   dune_dst(TTree *tree=0);
+   dune_dst(TTree *tree=0,char * fInputFileName = "");
    virtual ~dune_dst();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(int n_evt, char* tag,char * fOutFileName);
+   virtual void     Loop(int n_evt,char * fOutFileName);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
@@ -126,18 +126,17 @@ public :
 #endif
 
 #ifdef make_effs_cxx
-dune_dst::dune_dst(TTree *tree) : fChain(0) 
+dune_dst::dune_dst(TTree *tree,char * fInputFileName) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
-   if (tree == 0) {
-
+   if (tree == 0) {     
       // The following code should be used if you want this class to access a chain
       // of trees.
       TChain * chain = new TChain("dune_dst","");
 
       //FGT files  
-       chain->Add("../DUNE_ND_ntps/full/fgt/ndtf_output_nu_fgt.dst.root");
+       chain->Add(fInputFileName);
 /*      for ( int i = 1; i < 1778; i++) {
 	chain->Add(Form("DUNE_ND_ntps/fgt/nu/ndtf_output_nu_fgt_%d.dst.root", i));      
       }

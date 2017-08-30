@@ -3,7 +3,7 @@
 
 
 
-void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
+void dune_dst::Loop(int n_evt,char * fOutFileName)
 {
 
   if (fChain == 0) return;
@@ -263,7 +263,6 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
   }    
 
 
-  nentries = 10000; //Testing
   for( Long64_t jentry=0; jentry < nentries; jentry++ ) {
 
     Long64_t ientry = LoadTree(jentry);
