@@ -137,16 +137,16 @@ dune_dst::dune_dst(TTree *tree) : fChain(0)
       TChain * chain = new TChain("dune_dst","");
 
       //FGT files  
-      /* chain->Add("full/fgt/ndtf_output_nu_fgt.dst.root"); */
+       chain->Add("DUNE_ND_ntps/full/fgt/ndtf_output_nu_fgt.dst.root");
 /*      for ( int i = 1; i < 1778; i++) {
-	chain->Add(Form("fgt/nu/ndtf_output_nu_fgt_%d.dst.root", i));      
+	chain->Add(Form("DUNE_ND_ntps/fgt/nu/ndtf_output_nu_fgt_%d.dst.root", i));      
       }
 */      
       //GAr files
-      /* chain->Add("full/gar/ndtf_output_nu_gar.dst.root"); */
+      /* chain->Add("DUNE_ND_ntps/full/gar/ndtf_output_nu_gar.dst.root"); */
 
       //LAr files
-      chain->Add("full/lar/ndtf_output_nu_lar.dst.root");
+     // chain->Add("DUNE_ND_ntps/full/lar/ndtf_output_nu_lar.dst.root");
       
       tree = chain;
 
