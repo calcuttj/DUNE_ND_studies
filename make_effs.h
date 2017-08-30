@@ -380,17 +380,17 @@ TH1D * reco_int = new TH1D("reco", "", 100, 0, 10);
 TH1D * pid_int = new TH1D("pid", "", 100, 0, 10);
 
 /////Smear
-TH2D * had_smear = new TH2D("had_smear",";True E_{had} (GeV);Reconstructed E_{had} (GeV)",100,0,10,100,0,10);
-TH2D * had_total_smear = new TH2D("had_total_smear",";True E_{had} (GeV);Reconstructed E_{had} (GeV)",100,0,10,100,0,10);
-TH2D * muon_smear = new TH2D("muon_smear",";True E_{#mu} (GeV);Reconstructed E_{#mu} (GeV)",100,0,10,100,0,10);
-TH2D * proton_HM_smear = new TH2D("HM_proton_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",100,0,10,100,0,10);
-TH2D * piplus_HM_smear = new TH2D("HM_piplus_smear",";True E_{#pi^{+}} (GeV);Reconstructed E_{#pi^{+}} (GeV)",100,0,10,100,0,10);
-TH2D * piminus_HM_smear = new TH2D("HM_piminus_smear",";True E_{#pi^{-}} (GeV);Reconstructed E_{#pi^{-}} (GeV)",100,0,10,100,0,10);
-TH2D * proton_SHM_smear = new TH2D("SHM_proton_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",100,0,10,100,0,10);
-TH2D * piplus_SHM_smear = new TH2D("SHM_piplus_smear",";True E_{#pi^{+}} (GeV);Reconstructed E_{#pi^{+}} (GeV)",100,0,10,100,0,10);
-TH2D * piminus_SHM_smear = new TH2D("SHM_piminus_smear",";True E_{#pi^{-}} (GeV);Reconstructed E_{#pi^{-}} (GeV)",100,0,10,100,0,10);
-TH2D * proton_matched_smear = new TH2D("proton_matched_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",100,0,10,100,0,10);
-TH2D * proton_tracked_smear = new TH2D("proton_tracked_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",100,0,10,100,0,10);
+TH2D * had_smear = new TH2D("had_smear",";True E_{had} (GeV);Reconstructed E_{had} (GeV)",1000,0,10,1000,0,10);
+TH2D * had_total_smear = new TH2D("had_total_smear",";True E_{had} (GeV);Reconstructed E_{had} (GeV)",1000,0,10,1000,0,10);
+TH2D * muon_smear = new TH2D("muon_smear",";True E_{#mu} (GeV);Reconstructed E_{#mu} (GeV)",1000,0,10,1000,0,10);
+TH2D * proton_HM_smear = new TH2D("HM_proton_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",1000,0,10,1000,0,10);
+TH2D * piplus_HM_smear = new TH2D("HM_piplus_smear",";True E_{#pi^{+}} (GeV);Reconstructed E_{#pi^{+}} (GeV)",1000,0,10,1000,0,10);
+TH2D * piminus_HM_smear = new TH2D("HM_piminus_smear",";True E_{#pi^{-}} (GeV);Reconstructed E_{#pi^{-}} (GeV)",1000,0,10,1000,0,10);
+TH2D * proton_SHM_smear = new TH2D("SHM_proton_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",1000,0,10,1000,0,10);
+TH2D * piplus_SHM_smear = new TH2D("SHM_piplus_smear",";True E_{#pi^{+}} (GeV);Reconstructed E_{#pi^{+}} (GeV)",1000,0,10,1000,0,10);
+TH2D * piminus_SHM_smear = new TH2D("SHM_piminus_smear",";True E_{#pi^{-}} (GeV);Reconstructed E_{#pi^{-}} (GeV)",1000,0,10,1000,0,10);
+TH2D * proton_matched_smear = new TH2D("proton_matched_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",1000,0,10,1000,0,10);
+TH2D * proton_tracked_smear = new TH2D("proton_tracked_smear",";True E_{proton} (GeV);Reconstructed E_{proton} (GeV)",1000,0,10,1000,0,10);
 
 
 void fillHists(char* type, int pdg, int ind, float p, float costheta, float phi) {
