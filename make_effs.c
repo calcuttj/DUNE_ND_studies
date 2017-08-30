@@ -759,6 +759,11 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
   had_smear->Write();
   muon_smear->Write();
   proton_HM_smear->Write();
+  piplus_HM_smear->Write();
+  piminus_HM_smear->Write();
+  proton_SHM_smear->Write();
+  piplus_SHM_smear->Write();
+  piminus_SHM_smear->Write();
 
   argon_purity->Write();
   reco_purity->Write();
