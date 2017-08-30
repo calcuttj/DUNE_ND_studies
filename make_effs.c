@@ -305,6 +305,8 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
     int piminus_HM_index = -999;
     int piminus_SHM_index = -999;
 
+    float Etrue_total = 0.;
+    float Ereco_total = 0.;
 
     for( int i = 0; i < trueFSParticles; ++i ) {      
  
@@ -350,6 +352,8 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
       else{
         Etrue = trueFSParticles_energy[i];
       }
+
+      Etrue_total += Etrue;
       ////
 
 
@@ -357,17 +361,19 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
       for( int j = 0; j < recoFSParticles; ++j ) {
         if( recoFSParticles_id[j] == trackID ) {
           is_reconstructed = true; // something was reconstructed
-
+          
 	  fillHists("trk", pdg, 0, p_true, costheta_true, phi_true);
 	  fillHists("PID", pdg, 1, p_true, costheta_true, phi_true);
-
+ 
           int reco_pdg = recoFSParticles_pdg[j];
 
           if(reco_pdg == 2212){
             had_smear->Fill(Etrue,recoFSParticles_energy[j]-.938);
+            Ereco_total += recoFSParticles_energy-.938;
           }
           else if(reco_pdg == 211 || reco_pdg == -211 || reco_pdg == 111){
             had_smear->Fill(Etrue,recoFSParticles_energy[j]);
+            Ereco_total += recoFSParticles_energy;
           }
 
           if( reco_pdg == pdg ) {
@@ -375,7 +381,8 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
 	    fillHists("PID", pdg, 0, p_true, costheta_true, phi_true);
             
             if(abs(pdg) == 13) muon_smear->Fill(Etrue,recoFSParticles_energy[j]);
-            
+            else if(pdg == 2212) proton_matched_smear->Fill(Etrue, recoFSParticles_energy[j] - .938);
+           
           }
 
           break;
@@ -385,9 +392,13 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
 
       if(!is_reconstructed){
         if(abs(pdg) != 13) had_smear->Fill(Etrue,0.); 
+        
       }
+      
     }
-    
+   
+    had_total_smear->Fill(Etrue_total,Ereco_total);
+
     float proton_HM_etrue = trueFSParticles_energy[proton_HM_index] -.938;
     bool proton_HM_is_reconstructed = false;
 
@@ -757,7 +768,9 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
   fout->mkdir("Smears");
   fout->cd("Smears");
   had_smear->Write();
+  had_total_smear->Write();
   muon_smear->Write();
+  proton_matched_smear->Write();
   proton_HM_smear->Write();
   piplus_HM_smear->Write();
   piminus_HM_smear->Write();
