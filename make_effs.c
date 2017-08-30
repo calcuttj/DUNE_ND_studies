@@ -389,10 +389,24 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
     }
     
     float proton_HM_etrue = trueFSParticles_energy[proton_HM_index] -.938;
-
     bool proton_HM_is_reconstructed = false;
 
-/*    for( int j = 0; j < recoFSParticles; ++j ) {
+    float piplus_HM_etrue = trueFSParticles_energy[piplus_HM_index];
+    bool piplus_HM_is_reconstructed = false;
+
+    float piminus_HM_etrue = trueFSParticles_energy[piminus_HM_index];
+    bool piminus_HM_is_reconstructed = false;
+
+    float proton_SHM_etrue = trueFSParticles_energy[proton_SHM_index] -.938;
+    bool proton_SHM_is_reconstructed = false;
+
+    float piplus_SHM_etrue = trueFSParticles_energy[piplus_SHM_index];
+    bool piplus_SHM_is_reconstructed = false;
+
+    float piminus_SHM_etrue = trueFSParticles_energy[piminus_SHM_index];
+    bool piminus_SHM_is_reconstructed = false;
+
+    for( int j = 0; j < recoFSParticles; ++j ) {
 
       if(proton_HM_index != -999){
         if( recoFSParticles_id[j] == proton_HM_index ) {
@@ -401,19 +415,107 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
           if(reco_pdg == 2212){
             proton_HM_smear->Fill(proton_HM_etrue,recoFSParticles_energy[j] - .938);        
           }
-          else
+          else if(abs(reco_pdg) != 13)
           {
             proton_HM_smear->Fill(proton_HM_etrue,recoFSParticles_energy[j]);
           }
         }
       }
 
+      if(piplus_HM_index != -999){
+        if( recoFSParticles_id[j] == piplus_HM_index ) {
+          piplus_HM_is_reconstructed == true; 
+          int reco_pdg = recoFSParticles_pdg[j];
+          if(reco_pdg == 2212){
+            piplus_HM_smear->Fill(piplus_HM_etrue,recoFSParticles_energy[j] - .938);        
+          }
+          else if(abs(reco_pdg) != 13)
+          {
+            piplus_HM_smear->Fill(piplus_HM_etrue,recoFSParticles_energy[j]);
+          }
+        }
+      }
+
+      if(piminus_HM_index != -999){
+        if( recoFSParticles_id[j] == piminus_HM_index ) {
+          piminus_HM_is_reconstructed == true; 
+          int reco_pdg = recoFSParticles_pdg[j];
+          if(reco_pdg == 2212){
+            piminus_HM_smear->Fill(piminus_HM_etrue,recoFSParticles_energy[j] - .938);        
+          }
+          else if(abs(reco_pdg) != 13)
+           {
+            piminus_HM_smear->Fill(piminus_HM_etrue,recoFSParticles_energy[j]);
+          }
+        }
+      }
+
+      if(proton_SHM_index != -999){
+        if( recoFSParticles_id[j] == proton_SHM_index ) {
+          proton_SHM_is_reconstructed == true; 
+          int reco_pdg = recoFSParticles_pdg[j];
+          if(reco_pdg == 2212){
+            proton_SHM_smear->Fill(proton_SHM_etrue,recoFSParticles_energy[j] - .938);        
+          }
+          else if(abs(reco_pdg) != 13)
+          {
+            proton_SHM_smear->Fill(proton_SHM_etrue,recoFSParticles_energy[j]);
+          }
+        }
+      }
+
+      if(piplus_SHM_index != -999){
+        if( recoFSParticles_id[j] == piplus_SHM_index ) {
+          piplus_SHM_is_reconstructed == true; 
+          int reco_pdg = recoFSParticles_pdg[j];
+          if(reco_pdg == 2212){
+            piplus_SHM_smear->Fill(piplus_SHM_etrue,recoFSParticles_energy[j] - .938);        
+          }
+          else if(abs(reco_pdg) != 13)
+          {
+            piplus_SHM_smear->Fill(piplus_SHM_etrue,recoFSParticles_energy[j]);
+          }
+        }
+      }
+
+      if(piminus_SHM_index != -999){
+        if( recoFSParticles_id[j] == piminus_SHM_index ) {
+          piminus_SHM_is_reconstructed == true; 
+          int reco_pdg = recoFSParticles_pdg[j];
+          if(reco_pdg == 2212){
+            piminus_SHM_smear->Fill(piminus_SHM_etrue,recoFSParticles_energy[j] - .938);        
+          }
+          else if(abs(reco_pdg) != 13)
+           {
+            piminus_SHM_smear->Fill(piminus_SHM_etrue,recoFSParticles_energy[j]);
+          }
+        }
+      }
     }
 
     if(!proton_HM_is_reconstructed){
       proton_HM_smear->Fill(proton_HM_etrue,0.);
-    }*/
+    }
 
+    if(!piplus_HM_is_reconstructed){
+      piplus_HM_smear->Fill(piplus_HM_etrue,0.);
+    }
+
+    if(!piminus_HM_is_reconstructed){
+      piminus_HM_smear->Fill(piminus_HM_etrue,0.);
+    }
+
+    if(!proton_SHM_is_reconstructed){
+      proton_SHM_smear->Fill(proton_SHM_etrue,0.);
+    }
+
+    if(!piplus_SHM_is_reconstructed){
+      piplus_SHM_smear->Fill(piplus_SHM_etrue,0.);
+    }
+
+    if(!piminus_SHM_is_reconstructed){
+      piminus_SHM_smear->Fill(piminus_SHM_etrue,0.);
+    }
 
     if ( is_reconstructed ) {
       reco_int->Fill(Ev);
@@ -656,6 +758,7 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
   fout->cd("Smears");
   had_smear->Write();
   muon_smear->Write();
+  proton_HM_smear->Write();
 
   argon_purity->Write();
   reco_purity->Write();
