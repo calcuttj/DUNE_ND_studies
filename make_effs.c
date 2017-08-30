@@ -494,9 +494,13 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
 
       float phi_true = 180.*atan2(py_true, px_true)/pi + 180.;
 
-//      if(pdg == 2212 || pdg == 2112 || abs(pdg) == 211 || pdg == 111) Ehad_true += trueFSParticles_energy[i];
+      fillHists("trk", pdg, 1, p_true, costheta_true, phi_true);
+
+
+
+      //Smearing stuff
       float Etrue;
-      if(pdg == 2112)had_smear->Fill(trueFSParticles_energy[i]-.938,0);
+      if(pdg == 2112)Etrue = trueFSParticles_energy[i]-.938;
       else if(pdg == 2212){
         Etrue = trueFSParticles_energy[i] - .938;
         if(p_true > proton_HM){
@@ -521,7 +525,7 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
       else{
         Etrue = trueFSParticles_energy[i];
       }
-      fillHists("trk", pdg, 1, p_true, costheta_true, phi_true);
+      ////
 
 
       // check for matching reco particle
@@ -531,12 +535,8 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
 
 	  fillHists("trk", pdg, 0, p_true, costheta_true, phi_true);
 	  fillHists("PID", pdg, 1, p_true, costheta_true, phi_true);
-          int reco_pdg = recoFSParticles_pdg[j];
-          float px_reco = recoFSParticles_momentum[i][0];
-          float py_reco = recoFSParticles_momentum[i][1];
-          float pz_reco = recoFSParticles_momentum[i][2];
-          float p_reco  = sqrt(px_reco*px_reco + py_reco*py_reco + pz_reco*pz_reco);
 
+          int reco_pdg = recoFSParticles_pdg[j];
 
           if(reco_pdg == 2212){
             had_smear->Fill(Etrue,recoFSParticles_energy[j]-.938);
@@ -545,19 +545,21 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
             had_smear->Fill(Etrue,recoFSParticles_energy[j]);
           }
 
-          if( recoFSParticles_pdg[j] == pdg ) {
+          if( reco_pdg == pdg ) {
             is_reconstructed_correctly = true; // reco with correct particle type
 	    fillHists("PID", pdg, 0, p_true, costheta_true, phi_true);
             
             if(abs(pdg) == 13) muon_smear->Fill(Etrue,recoFSParticles_energy[j]);
             
           }
+
           break;
+
         }
       }
 
       if(!is_reconstructed){
-        had_smear->Fill(Etrue,0.); 
+        if(abs(pdg) != 13) had_smear->Fill(Etrue,0.); 
       }
     }
     
@@ -565,7 +567,7 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
 
     bool proton_HM_is_reconstructed = false;
 
-    for( int j = 0; j < recoFSParticles; ++j ) {
+/*    for( int j = 0; j < recoFSParticles; ++j ) {
 
       if(proton_HM_index != -999){
         if( recoFSParticles_id[j] == proton_HM_index ) {
@@ -585,7 +587,7 @@ void dune_dst::Loop(int n_evt, char* tag,char * fOutFileName)
 
     if(!proton_HM_is_reconstructed){
       proton_HM_smear->Fill(proton_HM_etrue,0.);
-    }
+    }*/
 
 
     if ( is_reconstructed ) {
