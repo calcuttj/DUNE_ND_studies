@@ -371,10 +371,11 @@ void dune_dst::Loop(int n_evt,char * fOutFileName)
             had_smear->Fill(Etrue,recoFSParticles_energy[j]-.938);
             Ereco_total += recoFSParticles_energy[j]-.938;
           }
-          else if(reco_pdg == 211 || reco_pdg == -211 || reco_pdg == 111){
+          else if(reco_pdg == 211 || reco_pdg == -211 /*|| reco_pdg == 111*/){
             had_smear->Fill(Etrue,recoFSParticles_energy[j]);
             Ereco_total += recoFSParticles_energy[j];
           }
+          
 
           if( reco_pdg == pdg ) {
             is_reconstructed_correctly = true; // reco with correct particle type
